@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<pset>
+
+    <!--
+        CS 564, Fall 2022
+        HOMEWORK 3 SUBMISSION TEMPLATE
+
+        Please copy and paste your SQL queries (and potentially Python and Latex code) 
+	into the appropriate spots below. 
+
+        When submitting SQL queries, please do not include the initial 
+        %sql or %%sql IPython commands. Just include the SQL code.
+
+        DO NOT DELETE THE <![CDATA[ ... ]]> LINES IN EACH <answer> TAG!
+        Doing so will break the autograder. To avoid accidentally breaking
+        something, please leave all existing comments in this template
+        intact in your submission.
+    -->
+
+    <student>
+        <name>
+            <!-- Insert your full name on the line below. -->
+                Laura Dinh
+        </name>
+        <studentid>
+            <!-- Insert your student ID number below. -->
+                9080660948
+        </studentid>
+    </student>
+
+
+    <!-- BEGIN PROBLEM 1 -->
+    <answer number="1a">
+        <!-- Paste your solution to problem 1, part (a) below this line. --><![CDATA[
+                SELECT DISTINCT provider, COUNT(*) 
+                FROM Hospital 
+                GROUP BY provider;
+        ]]><!-- End problem 1, part (a). -->
+    </answer>
+    <answer number="1b">
+        <!-- Paste your solution to problem 1, part (b) below this line. --><![CDATA[
+                SELECT Zip, COUNT(*)
+                FROM (
+                    SELECT DISTINCT Zip, City, State
+                    FROM Hospital
+                )
+                GROUP BY Zip
+                HAVING COUNT(*) > 1
+        ]]><!-- End problem 1, part (b). -->
+    </answer>
+    <!-- END PROBLEM 1 -->
+
+
+    <!-- BEGIN PROBLEM 2 -->
+    <answer number="2a">
+        <!-- Paste your solution to problem 2, part (a) below this line. --><![CDATA[
+answer = True
+explanation = "If the closure of {A,B} = {A,B,C,D,E,F}, then {A,B} is a superkey. We can follow the closure algorithm to find the closure of {A,B}. A and B are in closure because of Armstrong's Axiom 1. Then D and E will be in the closure because they are dependent on D. Since D is in the closure, C and F will be in the closure as well. So, because the closure of {A,B} is {A,B,D,E,C,F}, {A,B} is the superkey."
+        ]]><!-- End problem 2, part (a). -->
+    </answer>
+    <answer number="2b">
+        <!-- Paste your solution to problem 2, part (b) below this line. --><![CDATA[
+answer = False
+explanation = "To check if the decomposition is a lossless-joins, we use the Chase algorithm. After all FDs have been checked, the table looks like this: R1 = A, B, C, D1, E, R; R2 = A2, B2, C, D, E, F2; R3  = A, B3, C, D1, E, F. Because all rows still contain subscripts, the decomposition is not a lossless-join."
+        ]]><!-- End problem 2, part (b). -->
+    </answer>    
+    <answer number="2c">
+        <!-- Paste your solution to problem 2, part (c) below this line. --><![CDATA[
+answer = False
+explanation = "FDs A->D and D->F are not preserved by the decomposition. R(ABC)'s FDs are A->C (logically implied), R(CDE)'s FDs are D->C, and R(EFA)'s FDs are A->E and A->F (logically implied)."
+        ]]><!-- End problem 2, part (c). -->
+    </answer>
+    <answer number="2d">
+        <!-- Paste your solution to problem 2, part (d) below this line. --><![CDATA[
+answer = True
+explanation = "A->E is a FD of the relation. A->F is implied because A->D and D->F so A->F. Thus according to Armstrong's Axom 3, A->E and A->F is A->EF."
+        ]]><!-- End problem 2, part (d). -->
+    </answer>
+    <answer number="2e">
+        <!-- Paste your solution to problem 2, part (e) below this line. --><![CDATA[
+answer = False
+explanation = "The closure of A does not include B (C is logically implied from A->D and D->C) so A is not a superkey thus S is not in BCNF."
+        ]]><!-- End problem 2, part (e). -->
+    </answer>
+    <!-- END PROBLEM 2 -->
+
+    <!-- BEGIN PROBLEM 3 -->
+    <answer number="3a">
+        <!-- Paste your solution to problem 3, part (a) below this line. --><![CDATA[
+$$
+\pi_{name}(\sigma_{year=2021}(Conference \Join (Article \Join (Author \Join (\sigma_{afflication="UW-Madison"}(Person))))))
+$$
+        ]]><!-- End problem 3, part (a). -->
+    </answer>
+    <answer number="3b">
+        <!-- Paste your solution to problem 3, part (b) below this line. --><![CDATA[
+$$
+\pi_{name}(\pi_{artid}(\sigma_{name="John Doe"}(Person) \Join Author) \Join (\pi_{name,artid}(\sigma_{name!="John Doe"}(Person) \Join Author)))
+$$
+        ]]><!-- End problem 3, part (b). -->
+    </answer>
+    <answer number="3c">
+        <!-- Paste your solution to problem 3, part (c) below this line. --><![CDATA[
+$$
+\gamma_{pid, COUNT(artid)}((Article \Join (\sigma_{name="PODS"}(Conference))) \Join Author)
+$$
+        ]]><!-- End problem 3, part (c). -->
+    </answer>
+    <!-- END PROBLEM 3 -->
+
+</pset>
